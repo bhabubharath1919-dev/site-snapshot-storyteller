@@ -122,6 +122,6 @@ export function configSummary(config: SfiConfig): Record<string, string> {
   if (config.designPressure) out["Design pressure"] = config.designPressure;
   if (config.operatingTemperature) out["Operating temperature"] = config.operatingTemperature;
   if (config.designTemperature) out["Design temperature"] = config.designTemperature;
-  out.Quantity = String(config.quantity);
+  out["Quantity"] = String(config.quantity);
   return out;
 }

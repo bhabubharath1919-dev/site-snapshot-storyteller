@@ -71,7 +71,7 @@ export function SpecSheet({ product }: { product: Product }) {
           <Reveal>
             <dl className="border-t border-border">
               <Row k="NB size range" v={`${NB_SIZES[0]} NB – ${NB_SIZES[NB_SIZES.length - 1]} NB`} />
-              <Row k="Inch size" v={`${nbToInch(NB_SIZES[0])} – ${nbToInch(NB_SIZES[NB_SIZES.length - 1])}`} />
+              <Row k="Inch size" v={`${nbToInch(NB_SIZES[0]!)} – ${nbToInch(NB_SIZES[NB_SIZES.length - 1]!)}`} />
               <Row k="Pipe OD reference" v="Per ASME B36.10M — see table" />
               <Row k="Internal element" v={product.internal} />
               <Row k="View configurations" v={views} />

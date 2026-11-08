@@ -10,6 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApplicationsRouteImport } from './routes/applications'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EngineeringRouteImport } from './routes/engineering'
+import { Route as TechnicalResourcesRouteImport } from './routes/technical-resources'
+import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsDripTubeRouteImport } from './routes/products.drip-tube'
 import { Route as ProductsFlapperRouteImport } from './routes/products.flapper'
 import { Route as ProductsFullViewRouteImport } from './routes/products.full-view'
@@ -18,6 +23,31 @@ import { Route as ProductsRotorRouteImport } from './routes/products.rotor'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicationsRoute = ApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EngineeringRoute = EngineeringRouteImport.update({
+  id: '/engineering',
+  path: '/engineering',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TechnicalResourcesRoute = TechnicalResourcesRouteImport.update({
+  id: '/technical-resources',
+  path: '/technical-resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsDripTubeRoute = ProductsDripTubeRouteImport.update({
@@ -43,56 +73,91 @@ const ProductsRotorRoute = ProductsRotorRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/applications': typeof ApplicationsRoute
+  '/contact': typeof ContactRoute
+  '/engineering': typeof EngineeringRoute
+  '/technical-resources': typeof TechnicalResourcesRoute
   '/products/drip-tube': typeof ProductsDripTubeRoute
   '/products/flapper': typeof ProductsFlapperRoute
   '/products/full-view': typeof ProductsFullViewRoute
   '/products/rotor': typeof ProductsRotorRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/applications': typeof ApplicationsRoute
+  '/contact': typeof ContactRoute
+  '/engineering': typeof EngineeringRoute
+  '/technical-resources': typeof TechnicalResourcesRoute
   '/products/drip-tube': typeof ProductsDripTubeRoute
   '/products/flapper': typeof ProductsFlapperRoute
   '/products/full-view': typeof ProductsFullViewRoute
   '/products/rotor': typeof ProductsRotorRoute
+  '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/applications': typeof ApplicationsRoute
+  '/contact': typeof ContactRoute
+  '/engineering': typeof EngineeringRoute
+  '/technical-resources': typeof TechnicalResourcesRoute
   '/products/drip-tube': typeof ProductsDripTubeRoute
   '/products/flapper': typeof ProductsFlapperRoute
   '/products/full-view': typeof ProductsFullViewRoute
   '/products/rotor': typeof ProductsRotorRoute
+  '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/applications'
+    | '/contact'
+    | '/engineering'
+    | '/technical-resources'
     | '/products/drip-tube'
     | '/products/flapper'
     | '/products/full-view'
     | '/products/rotor'
+    | '/products/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/applications'
+    | '/contact'
+    | '/engineering'
+    | '/technical-resources'
     | '/products/drip-tube'
     | '/products/flapper'
     | '/products/full-view'
     | '/products/rotor'
+    | '/products'
   id:
     | '__root__'
     | '/'
+    | '/applications'
+    | '/contact'
+    | '/engineering'
+    | '/technical-resources'
     | '/products/drip-tube'
     | '/products/flapper'
     | '/products/full-view'
     | '/products/rotor'
+    | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApplicationsRoute: typeof ApplicationsRoute
+  ContactRoute: typeof ContactRoute
+  EngineeringRoute: typeof EngineeringRoute
+  TechnicalResourcesRoute: typeof TechnicalResourcesRoute
   ProductsDripTubeRoute: typeof ProductsDripTubeRoute
   ProductsFlapperRoute: typeof ProductsFlapperRoute
   ProductsFullViewRoute: typeof ProductsFullViewRoute
   ProductsRotorRoute: typeof ProductsRotorRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -102,6 +167,41 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applications': {
+      id: '/applications'
+      path: '/applications'
+      fullPath: '/applications'
+      preLoaderRoute: typeof ApplicationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/engineering': {
+      id: '/engineering'
+      path: '/engineering'
+      fullPath: '/engineering'
+      preLoaderRoute: typeof EngineeringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/technical-resources': {
+      id: '/technical-resources'
+      path: '/technical-resources'
+      fullPath: '/technical-resources'
+      preLoaderRoute: typeof TechnicalResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/': {
+      id: '/products/'
+      path: '/products'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products/drip-tube': {
@@ -137,10 +237,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApplicationsRoute: ApplicationsRoute,
+  ContactRoute: ContactRoute,
+  EngineeringRoute: EngineeringRoute,
+  TechnicalResourcesRoute: TechnicalResourcesRoute,
   ProductsDripTubeRoute: ProductsDripTubeRoute,
   ProductsFlapperRoute: ProductsFlapperRoute,
   ProductsFullViewRoute: ProductsFullViewRoute,
   ProductsRotorRoute: ProductsRotorRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
