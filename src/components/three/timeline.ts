@@ -34,16 +34,17 @@ const mixV = (a: Vec3, b: Vec3, t: number): Vec3 => [
 type Key = [number, Vec3, Vec3];
 
 function path(keys: Key[], p: number): { cam: Vec3; target: Vec3 } {
-  if (p <= keys[0][0]) return { cam: keys[0][1], target: keys[0][2] };
+  const first = keys[0]!;
+  if (p <= first[0]) return { cam: first[1], target: first[2] };
   for (let i = 0; i < keys.length - 1; i++) {
-    const [pa, ca, ta] = keys[i];
-    const [pb, cb, tb] = keys[i + 1];
+    const [pa, ca, ta] = keys[i]!;
+    const [pb, cb, tb] = keys[i + 1]!;
     if (p <= pb) {
       const t = ss(pa, pb, p);
       return { cam: mixV(ca, cb, t), target: mixV(ta, tb, t) };
     }
   }
-  const last = keys[keys.length - 1];
+  const last = keys[keys.length - 1]!;
   return { cam: last[1], target: last[2] };
 }
 
@@ -75,7 +76,7 @@ export function timeline(kind: ProductSlug, p: number): SceneState {
         [0.6, [6.8, 2.6, 7.0], [0, 0, 0.2]],
         [0.8, [4.6, 1.8, 5.2], O],
       ];
-      const cam = p < 0.8 ? path(keys, p) : orbit(p, 0.8, keys[5], Math.PI * 1.6, 1.2);
+      const cam = p < 0.8 ? path(keys, p) : orbit(p, 0.8, keys[5]!, Math.PI * 1.6, 1.2);
       return {
         gather: ss(0.36, 0.48, p),
         explode: ss(0.34, 0.46, p) * (1 - ss(0.6, 0.78, p)),
@@ -98,7 +99,7 @@ export function timeline(kind: ProductSlug, p: number): SceneState {
         [0.74, [3.8, 1.2, 5.2], O],
         [0.86, [0.5, 0.3, 5.0], O],
       ];
-      const cam = p < 0.9 ? path(keys, p) : orbit(p, 0.9, keys[6], Math.PI * 1.2, 1.4);
+      const cam = p < 0.9 ? path(keys, p) : orbit(p, 0.9, keys[6]!, Math.PI * 1.2, 1.4);
       const flowA = ss(0.18, 0.26, p) * (1 - ss(0.36, 0.42, p));
       const flowB = ss(0.74, 0.8, p) * (1 - ss(0.93, 0.98, p));
       const deflect =
@@ -125,7 +126,7 @@ export function timeline(kind: ProductSlug, p: number): SceneState {
         [0.7, [5.0, 1.5, 5.0], O],
         [0.8, [6.2, 1.1, 0.6], O],
       ];
-      const cam = p < 0.86 ? path(keys, p) : orbit(p, 0.86, keys[6], Math.PI * 2, 1.6);
+      const cam = p < 0.86 ? path(keys, p) : orbit(p, 0.86, keys[6]!, Math.PI * 2, 1.6);
       return {
         gather: 1,
         explode: ss(0.36, 0.46, p) * (1 - ss(0.56, 0.68, p)),
@@ -148,7 +149,7 @@ export function timeline(kind: ProductSlug, p: number): SceneState {
         [0.72, [4.0, 0.8, 5.6], O],
         [0.8, [0.5, 0.2, 6.4], O],
       ];
-      const cam = p < 0.86 ? path(keys, p) : orbit(p, 0.86, keys[6], Math.PI * 1.5, 1.2);
+      const cam = p < 0.86 ? path(keys, p) : orbit(p, 0.86, keys[6]!, Math.PI * 1.5, 1.2);
       return {
         gather: ss(0.36, 0.48, p),
         explode: ss(0.34, 0.46, p) * (1 - ss(0.56, 0.7, p)),

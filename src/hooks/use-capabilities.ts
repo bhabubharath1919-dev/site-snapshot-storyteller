@@ -46,7 +46,7 @@ export function useInView<T extends Element>(ref: React.RefObject<T | null>, roo
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { rootMargin });
+    const io = new IntersectionObserver(([e]) => setInView(e?.isIntersecting ?? false), { rootMargin });
     io.observe(el);
     return () => io.disconnect();
   }, [ref, rootMargin]);

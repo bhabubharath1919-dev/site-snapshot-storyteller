@@ -10,33 +10,89 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsDripTubeRouteImport } from './routes/products.drip-tube'
+import { Route as ProductsFlapperRouteImport } from './routes/products.flapper'
+import { Route as ProductsFullViewRouteImport } from './routes/products.full-view'
+import { Route as ProductsRotorRouteImport } from './routes/products.rotor'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductsDripTubeRoute = ProductsDripTubeRouteImport.update({
+  id: '/products/drip-tube',
+  path: '/products/drip-tube',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsFlapperRoute = ProductsFlapperRouteImport.update({
+  id: '/products/flapper',
+  path: '/products/flapper',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsFullViewRoute = ProductsFullViewRouteImport.update({
+  id: '/products/full-view',
+  path: '/products/full-view',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRotorRoute = ProductsRotorRouteImport.update({
+  id: '/products/rotor',
+  path: '/products/rotor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/products/drip-tube': typeof ProductsDripTubeRoute
+  '/products/flapper': typeof ProductsFlapperRoute
+  '/products/full-view': typeof ProductsFullViewRoute
+  '/products/rotor': typeof ProductsRotorRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/products/drip-tube': typeof ProductsDripTubeRoute
+  '/products/flapper': typeof ProductsFlapperRoute
+  '/products/full-view': typeof ProductsFullViewRoute
+  '/products/rotor': typeof ProductsRotorRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/products/drip-tube': typeof ProductsDripTubeRoute
+  '/products/flapper': typeof ProductsFlapperRoute
+  '/products/full-view': typeof ProductsFullViewRoute
+  '/products/rotor': typeof ProductsRotorRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/products/drip-tube'
+    | '/products/flapper'
+    | '/products/full-view'
+    | '/products/rotor'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/products/drip-tube'
+    | '/products/flapper'
+    | '/products/full-view'
+    | '/products/rotor'
+  id:
+    | '__root__'
+    | '/'
+    | '/products/drip-tube'
+    | '/products/flapper'
+    | '/products/full-view'
+    | '/products/rotor'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductsDripTubeRoute: typeof ProductsDripTubeRoute
+  ProductsFlapperRoute: typeof ProductsFlapperRoute
+  ProductsFullViewRoute: typeof ProductsFullViewRoute
+  ProductsRotorRoute: typeof ProductsRotorRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +104,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/drip-tube': {
+      id: '/products/drip-tube'
+      path: '/products/drip-tube'
+      fullPath: '/products/drip-tube'
+      preLoaderRoute: typeof ProductsDripTubeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/flapper': {
+      id: '/products/flapper'
+      path: '/products/flapper'
+      fullPath: '/products/flapper'
+      preLoaderRoute: typeof ProductsFlapperRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/full-view': {
+      id: '/products/full-view'
+      path: '/products/full-view'
+      fullPath: '/products/full-view'
+      preLoaderRoute: typeof ProductsFullViewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/rotor': {
+      id: '/products/rotor'
+      path: '/products/rotor'
+      fullPath: '/products/rotor'
+      preLoaderRoute: typeof ProductsRotorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductsDripTubeRoute: ProductsDripTubeRoute,
+  ProductsFlapperRoute: ProductsFlapperRoute,
+  ProductsFullViewRoute: ProductsFullViewRoute,
+  ProductsRotorRoute: ProductsRotorRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

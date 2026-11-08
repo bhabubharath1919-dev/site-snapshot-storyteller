@@ -194,9 +194,9 @@ export function SfiModel({
   showLabels = true,
 }: {
   kind: ProductSlug;
-  variant?: WindowVariant;
+  variant?: WindowVariant | undefined;
   state: MutableRefObject<SceneState>;
-  showLabels?: boolean;
+  showLabels?: boolean | undefined;
 }) {
   const m = useMaterials();
   const g = useBodyGeometry(variant);
@@ -436,7 +436,7 @@ export function SfiModel({
     }
     const geo = new THREE.BufferGeometry();
     geo.setAttribute("position", new THREE.BufferAttribute(new Float32Array(n * 3), 3));
-    geo.userData.base = base;
+    geo.userData["base"] = base;
     return geo;
   }, []);
 
@@ -498,22 +498,22 @@ export function SfiModel({
       particleMat.opacity = s.flowVisible * 0.9;
       pts.visible = s.flowVisible > 0.01;
       if (pts.visible) {
-        const base = particleGeo.userData.base as Float32Array;
-        const pos = particleGeo.attributes.position as THREE.BufferAttribute;
+        const base = particleGeo.userData["base"] as Float32Array;
+        const pos = particleGeo.attributes["position"] as THREE.BufferAttribute;
         const arr = pos.array as Float32Array;
         const n = base.length / 4;
         const isolated = s.gather < 0.5;
         for (let i = 0; i < n; i++) {
-          let x = base[i * 4] + s.flow * 0.35 * base[i * 4 + 3];
+          let x = base[i * 4]! + s.flow * 0.35 * base[i * 4 + 3]!;
           x = ((((x + 2.5) % 5) + 5) % 5) - 2.5;
           const inChamber = Math.abs(x) < 0.85;
           const spread = isolated ? 0.75 : inChamber ? g.innerR * 0.9 : 0.36;
-          let y = base[i * 4 + 1] * spread;
+          let y = base[i * 4 + 1]! * spread;
           // rotor: particles curl around the impeller
           if (kind === "rotor" && inChamber) y += Math.sin(x * 3) * 0.08;
           arr[i * 3] = x;
           arr[i * 3 + 1] = y;
-          arr[i * 3 + 2] = base[i * 4 + 2] * (inChamber || isolated ? 0.3 : 0.36);
+          arr[i * 3 + 2] = base[i * 4 + 2]! * (inChamber || isolated ? 0.3 : 0.36);
         }
         pos.needsUpdate = true;
       }

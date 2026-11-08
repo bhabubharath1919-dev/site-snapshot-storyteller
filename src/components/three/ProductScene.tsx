@@ -38,10 +38,10 @@ export default function ProductScene({
   onReady,
 }: {
   kind: ProductSlug;
-  variant?: WindowVariant;
+  variant?: WindowVariant | undefined;
   progress: MutableRefObject<number>;
   active: boolean;
-  lowPower?: boolean;
+  lowPower?: boolean | undefined;
   onReady?: () => void;
 }) {
   const state = useRef<SceneState>(timeline(kind, progress.current) ?? emptyState());
