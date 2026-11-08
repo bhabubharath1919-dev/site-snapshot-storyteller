@@ -154,7 +154,7 @@ export function timeline(kind: ProductSlug, p: number): SceneState {
         explode: ss(0.34, 0.46, p) * (1 - ss(0.56, 0.7, p)),
         internal: 0,
         flow: p * 26,
-        flowVisible: 1,
+        flowVisible: 0,
         beam: 0,
         labels: ss(0.46, 0.5, p) * (1 - ss(0.54, 0.57, p)),
         xray: 0,
