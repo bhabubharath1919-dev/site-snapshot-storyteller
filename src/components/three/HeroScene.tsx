@@ -8,7 +8,9 @@ import { emptyState, type SceneState } from "./timeline";
 
 function Rig({ state, offsetX }: { state: React.MutableRefObject<SceneState>; offsetX: number }) {
   const group = useRef<THREE.Group>(null);
-  useFrame(({ clock, camera }, delta) => {
+  useFrame(({ clock, camera, size }, delta) => {
+    // Portrait screens: pull the camera back and aim low so the model sits above the headline.
+    const narrow = size.width < size.height;
     const t = clock.getElapsedTime();
     const scroll = typeof window !== "undefined" ? window.scrollY / window.innerHeight : 0;
     const s = state.current;
@@ -20,8 +22,8 @@ function Rig({ state, offsetX }: { state: React.MutableRefObject<SceneState>; of
       group.current.rotation.x = 0.12 + Math.sin(t * 0.25) * 0.04;
     }
     const a = t * 0.08;
-    camera.position.set(Math.sin(a) * 0.6, 0.5 + Math.sin(t * 0.2) * 0.15, 7.4 - scroll * 0.8);
-    camera.lookAt(offsetX * 0.35, 0, 0);
+    camera.position.set(Math.sin(a) * 0.6, 0.5 + Math.sin(t * 0.2) * 0.15, (narrow ? 13 : 7.4) - scroll * 0.8);
+    camera.lookAt(offsetX * 0.35, narrow ? -1.6 : 0, 0);
   });
   return (
     <group position={[offsetX, -0.1, 0]}>

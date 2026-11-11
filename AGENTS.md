@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Shared site chrome (Nav, Footer, web fonts) lives in `src/routes/__root.tsx` around `<Outlet />`; pages render only their own sections.
+- 3D scenes (`src/components/three/*`) are lazy-loaded behind `useCapabilities()` with a static image fallback for reduced motion / no WebGL, because three.js cannot run during SSR.
+- Product content and spec option lists live in `src/lib/products.ts` and `src/lib/specs.ts`; unknown manufacturer dimensions display "on request" rather than invented numbers.
