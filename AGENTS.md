@@ -34,3 +34,4 @@ use the editor.
 - Shared site chrome (Nav, Footer, web fonts) lives in `src/routes/__root.tsx` around `<Outlet />`; pages render only their own sections.
 - 3D scenes (`src/components/three/*`) are lazy-loaded behind `useCapabilities()` with a static image fallback for reduced motion / no WebGL, because three.js cannot run during SSR.
 - Product content and spec option lists live in `src/lib/products.ts` and `src/lib/specs.ts`; unknown manufacturer dimensions display "on request" rather than invented numbers.
+- Keep `.npmrc` with `legacy-peer-deps=true` and `engines.node` in package.json: plain `npm install` otherwise crashes on the vitest/vite 8 peer set, and vite 8 needs Node 20.19+.
